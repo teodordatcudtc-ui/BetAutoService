@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://betautoservice.ro'),
   title: 'Bet Auto Service - Service Auto Profesional în București',
   description: 'Service auto profesional în București. Reparații, diagnoză, schimb ulei, roți și multe altele. Programează o vizită la Strada Drumul Garii 8. Telefon: 0726226622',
   keywords: 'service auto, reparații auto, București, diagnoză auto, schimb ulei, roți, Bet Auto Service',
@@ -21,7 +22,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  viewport: 'width=device-width, initial-scale=1',
 }
 
 export default function RootLayout({

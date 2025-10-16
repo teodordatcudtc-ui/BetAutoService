@@ -39,7 +39,7 @@ export default function AboutPreview() {
   return (
     <section id="about-preview" className="py-20 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900">
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center px-4 sm:px-0">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

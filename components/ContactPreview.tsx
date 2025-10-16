@@ -71,7 +71,7 @@ export default function ContactPreview() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 mb-12 px-4 sm:px-0">
           {contactInfo.map((info, index) => (
             <motion.div
               key={index}

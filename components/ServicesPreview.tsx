@@ -38,6 +38,18 @@ export default function ServicesPreview() {
     }
   }, [])
 
+  const getServiceSlug = (title: string) => {
+    const slugMap: Record<string, string> = {
+      'Reparații Auto': 'reparatii-auto',
+      'Diagnoză Tehnică': 'diagnoza-tehnica',
+      'Schimb Ulei': 'schimb-ulei',
+      'Montaj Roți': 'montaj-roti',
+      'ITP': 'itp',
+      'Service Rapid': 'service-rapid'
+    }
+    return slugMap[title] || title.toLowerCase().replace(/ă/g, 'a').replace(/ț/g, 't').replace(/î/g, 'i').replace(/â/g, 'a').replace(/ș/g, 's').replace(/\s+/g, '-')
+  }
+
   const services = [
     {
       icon: Wrench,
@@ -78,63 +90,80 @@ export default function ServicesPreview() {
   ]
 
   return (
-    <section id="services-preview" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="container-custom">
+    <section id="services-preview" className="py-16 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+      <div className="container-custom relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-dark-900 mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-dark-900 mb-4 leading-tight">
             Serviciile <span className="text-gradient">Noastre</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Oferim o gamă completă de servicii auto profesionale pentru a-ți menține vehiculul în stare perfectă
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+            Servicii profesionale pentru toate nevoile tale auto
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 px-4 sm:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 px-4 sm:px-0">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group"
+              initial={{ opacity: 0, y: 60, scale: 0.9 }}
+              animate={{ 
+                opacity: isVisible ? 1 : 0, 
+                y: isVisible ? 0 : 60,
+                scale: isVisible ? 1 : 0.9
+              }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.1,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="card-modern group relative overflow-hidden"
             >
-              <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <service.icon className="h-8 w-8 text-white" />
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-primary-600/0 group-hover:from-primary-500/5 group-hover:to-primary-600/5 transition-all duration-500"></div>
+              
+              {/* Icon with glow effect */}
+              <div className="relative mb-5">
+                <div className={`absolute inset-0 bg-gradient-to-r ${service.color} rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+                <div className={`relative w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300`}>
+                  <service.icon className="h-8 w-8 text-white" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-dark-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
+
+              <h3 className="text-xl font-black text-dark-900 mb-3 group-hover:text-primary-600 transition-colors duration-300">
                 {service.title}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-5 text-sm leading-relaxed">
                 {service.description}
               </p>
               <Link
-                href="/servicii"
-                className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300 group-hover:translate-x-1"
+                href={`/servicii/${getServiceSlug(service.title)}`}
+                className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-all duration-300 text-sm group-hover:gap-2"
               >
-                Află mai multe
-                <ArrowRight className="h-4 w-4 ml-2" />
+                <span>Află mai multe</span>
+                <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </motion.div>
           ))}
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center"
         >
           <Link
             href="/servicii"
-            className="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2 group"
+            className="btn-primary text-base px-8 py-3.5 inline-flex items-center space-x-2 group"
           >
             <span>Vezi Toate Serviciile</span>
-            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
         </motion.div>
       </div>

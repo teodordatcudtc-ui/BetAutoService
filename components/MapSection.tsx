@@ -59,7 +59,7 @@ export default function MapSection() {
       </div>
 
       {/* Directions */}
-      <div className="bg-gradient-to-r from-primary-500/10 to-primary-600/10 rounded-xl p-6 border border-primary-500/20">
+      <div className="bg-white rounded-xl p-6 shadow-lg">
         <h4 className="text-lg font-bold text-dark-900 mb-4 flex items-center space-x-2">
           <Navigation className="h-5 w-5 text-primary-500" />
           <span>Cum Să Ajungi</span>
@@ -88,7 +88,7 @@ export default function MapSection() {
           </div>
         </div>
         
-        <div className="mt-4 p-4 bg-white rounded-lg">
+        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <Clock className="h-4 w-4" />
             <span>Dacă ai probleme să ne găsești, sună-ne la 0726226622</span>

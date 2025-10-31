@@ -12,7 +12,7 @@ export default function AboutHero() {
   ]
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900">
+    <section className="relative min-h-[65vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 pt-20">
       {/* Background Pattern */}
       <div 
         className="absolute inset-0 opacity-20"

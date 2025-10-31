@@ -93,9 +93,9 @@ export default function ServicesPreview() {
     <section id="services-preview" className="py-16 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
       <div className="container-custom relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-dark-900 mb-4 leading-tight">
@@ -110,16 +110,16 @@ export default function ServicesPreview() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 60, scale: 0.9 }}
-              animate={{ 
-                opacity: isVisible ? 1 : 0, 
-                y: isVisible ? 0 : 60,
-                scale: isVisible ? 1 : 0.9
+              initial={{ opacity: 1, y: 0, scale: 1 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                scale: 1
               }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ 
-                duration: 0.8, 
-                delay: index * 0.1,
-                ease: [0.22, 1, 0.36, 1]
+                duration: 0.5, 
+                delay: index * 0.05
               }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="card-modern group relative overflow-hidden"
@@ -153,9 +153,9 @@ export default function ServicesPreview() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="text-center"
         >
           <Link

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Menu, X, Phone, Wrench, Sparkles } from 'lucide-react'
 
 export default function Navigation() {
@@ -102,89 +102,51 @@ export default function Navigation() {
           </div>
 
           {/* Mobile menu button */}
-          <motion.button
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-50 p-2"
-            whileTap={{ scale: 0.9 }}
           >
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="h-7 w-7" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="h-7 w-7" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+            {isOpen ? (
+              <X className="h-7 w-7" />
+            ) : (
+              <Menu className="h-7 w-7" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-40 md:hidden"
-                onClick={() => setIsOpen(false)}
-              />
-              <motion.div
-                initial={{ x: '100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="md:hidden fixed top-24 right-0 bottom-0 w-80 bg-dark-900/98 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-40 overflow-y-auto"
-              >
-                <div className="p-8 space-y-6">
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="block text-white hover:text-primary-400 font-bold text-xl transition-colors duration-300 py-3 border-b border-white/5"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  ))}
-                  <motion.a
-                    href="tel:0726226622"
-                    className="btn-primary flex items-center justify-center space-x-2 w-full mt-8"
+        {isOpen && (
+          <>
+            <div
+              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <div
+              className="md:hidden fixed top-24 right-0 bottom-0 w-80 bg-dark-900/98 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-40 overflow-y-auto"
+            >
+              <div className="p-8 space-y-6">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block text-white hover:text-primary-400 font-bold text-xl transition-colors duration-300 py-3 border-b border-white/5"
                     onClick={() => setIsOpen(false)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
                   >
-                    <Phone className="h-5 w-5" />
-                    <span>0726226622</span>
-                  </motion.a>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+                    {item.name}
+                  </Link>
+                ))}
+                <a
+                  href="tel:0726226622"
+                  className="btn-primary flex items-center justify-center space-x-2 w-full mt-8"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Phone className="h-5 w-5" />
+                  <span>0726226622</span>
+                </a>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </motion.nav>
   )

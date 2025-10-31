@@ -118,7 +118,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
                 transition={{ duration: 0.8, delay: 1 }}
-                className="flex flex-wrap justify-center gap-3"
+                className="hidden md:flex flex-wrap justify-center gap-3"
               >
                 {features.map((feature, index) => (
                   <motion.div

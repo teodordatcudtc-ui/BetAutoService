@@ -37,7 +37,7 @@ export default function Navigation() {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled 
           ? 'bg-dark-900/95 backdrop-blur-xl shadow-2xl border-b border-white/5' 
           : 'bg-dark-900/60 backdrop-blur-lg'
@@ -103,10 +103,11 @@ export default function Navigation() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              setIsOpen(!isOpen)
+              setIsOpen(prev => !prev)
             }}
-            className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-[60] p-2 flex-shrink-0 bg-dark-800/50 rounded-lg active:bg-dark-700/50"
+            className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-[120] p-2 flex-shrink-0 bg-dark-800/50 rounded-lg active:bg-dark-700/50 touch-manipulation"
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? (
               <X className="h-6 w-6" />
@@ -120,27 +121,31 @@ export default function Navigation() {
         {isOpen && (
           <>
             <div
-              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[45] md:hidden"
+              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[105] md:hidden"
               onClick={() => setIsOpen(false)}
             />
             <div
-              className="md:hidden fixed top-20 left-0 right-0 bottom-0 w-full bg-dark-900/98 backdrop-blur-2xl shadow-2xl z-[50] overflow-y-auto"
+              className="md:hidden fixed top-20 left-0 right-0 bottom-0 w-full bg-dark-900 shadow-2xl z-[110] overflow-y-auto"
             >
-              <div className="p-8 space-y-6">
+              <div className="p-6 md:p-8 space-y-4 md:space-y-6">
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block text-white hover:text-primary-400 font-bold text-xl transition-colors duration-300 py-3 border-b border-white/5"
-                    onClick={() => setIsOpen(false)}
+                    className="block text-white hover:text-primary-400 font-bold text-lg md:text-xl transition-colors duration-300 py-3 border-b border-white/5"
+                    onClick={() => {
+                      setIsOpen(false)
+                    }}
                   >
                     {item.name}
                   </Link>
                 ))}
                 <a
                   href="tel:0726226622"
-                  className="btn-primary flex items-center justify-center space-x-2 w-full mt-8"
-                  onClick={() => setIsOpen(false)}
+                  className="btn-primary flex items-center justify-center space-x-2 w-full mt-6 md:mt-8"
+                  onClick={() => {
+                    setIsOpen(false)
+                  }}
                 >
                   <Phone className="h-5 w-5" />
                   <span>0726226622</span>

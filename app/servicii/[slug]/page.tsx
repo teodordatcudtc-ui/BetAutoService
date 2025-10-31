@@ -532,7 +532,7 @@ export default function ServicePage() {
                 {service.longDescription}
               </p>
               {service.price && (
-                <div className="mb-4 flex items-center gap-4">
+                <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <span className="text-2xl font-black text-primary-400">{service.price}</span>
                   {service.duration && (
                     <div className="flex items-center gap-2 text-gray-400">

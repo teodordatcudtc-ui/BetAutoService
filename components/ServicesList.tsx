@@ -103,45 +103,47 @@ export default function ServicesList() {
       {services.map((service, index) => {
         const slug = getServiceSlug(service.title)
         return (
-          <Link 
+          <motion.div
             key={index}
-            href={`/servicii/${slug}`}
-            className="block"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 group h-full relative"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 group h-full cursor-pointer"
-            >
-              <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <service.icon className="h-8 w-8 text-white" />
-              </div>
-              
-              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary-400 transition-colors duration-300">
-                {service.title}
-              </h3>
-              
-              <p className="text-gray-300 mb-6">
-                {service.description}
-              </p>
-              
-              <div className="space-y-2 mb-6">
-                {service.features.slice(0, 3).map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-primary-400 flex-shrink-0" />
-                    <span className="text-sm text-gray-300">{feature}</span>
-                  </div>
-                ))}
-              </div>
+            <Link 
+              href={`/servicii/${slug}`}
+              className="absolute inset-0 z-10"
+              aria-label={`Află mai multe despre ${service.title}`}
+            />
+              <div className="relative z-0">
+                <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <service.icon className="h-8 w-8 text-white" />
+                </div>
+                
+                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary-400 transition-colors duration-300">
+                  {service.title}
+                </h3>
+                
+                <p className="text-gray-300 mb-6">
+                  {service.description}
+                </p>
+                
+                <div className="space-y-2 mb-6">
+                  {service.features.slice(0, 3).map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-primary-400 flex-shrink-0" />
+                      <span className="text-sm text-gray-300">{feature}</span>
+                    </div>
+                  ))}
+                </div>
 
-              <div className="flex items-center text-primary-400 font-semibold text-sm group-hover:gap-2 transition-all duration-300">
-                <span>Află mai multe</span>
-                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                <div className="flex items-center text-primary-400 font-semibold text-sm group-hover:gap-2 transition-all duration-300 pointer-events-none">
+                  <span>Află mai multe</span>
+                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
               </div>
             </motion.div>
-          </Link>
         )
       })}
     </div>

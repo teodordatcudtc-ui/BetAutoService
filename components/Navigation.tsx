@@ -36,15 +36,12 @@ export default function Navigation() {
   ]
 
   return (
-    <motion.nav 
+    <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
           ? 'bg-dark-900/95 backdrop-blur-xl shadow-2xl border-b border-white/5' 
           : 'bg-dark-900/60 backdrop-blur-lg'
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-20 md:h-24">
@@ -127,7 +124,7 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             />
             <div
-              className="md:hidden fixed top-20 right-0 bottom-0 w-full sm:w-80 bg-dark-900/98 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-[50] overflow-y-auto"
+              className="md:hidden fixed top-20 left-0 right-0 bottom-0 w-full bg-dark-900/98 backdrop-blur-2xl shadow-2xl z-[50] overflow-y-auto"
             >
               <div className="p-8 space-y-6">
                 {navItems.map((item) => (
@@ -153,6 +150,6 @@ export default function Navigation() {
           </>
         )}
       </div>
-    </motion.nav>
+    </nav>
   )
 }

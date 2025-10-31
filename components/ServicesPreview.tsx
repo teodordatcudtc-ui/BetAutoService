@@ -125,25 +125,25 @@ export default function ServicesPreview() {
               className="card-modern group relative overflow-hidden"
             >
               {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-primary-600/0 group-hover:from-primary-500/5 group-hover:to-primary-600/5 transition-all duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-primary-600/0 group-hover:from-primary-500/5 group-hover:to-primary-600/5 transition-all duration-500 pointer-events-none"></div>
               
               {/* Icon with glow effect */}
-              <div className="relative mb-5">
+              <div className="relative mb-5 z-10">
                 <div className={`absolute inset-0 bg-gradient-to-r ${service.color} rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
                 <div className={`relative w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300`}>
                   <service.icon className="h-8 w-8 text-white" />
                 </div>
               </div>
 
-              <h3 className="text-xl font-black text-dark-900 mb-3 group-hover:text-primary-600 transition-colors duration-300">
+              <h3 className="text-xl font-black text-dark-900 mb-3 group-hover:text-primary-600 transition-colors duration-300 relative z-10">
                 {service.title}
               </h3>
-              <p className="text-gray-600 mb-5 text-sm leading-relaxed">
+              <p className="text-gray-600 mb-5 text-sm leading-relaxed relative z-10">
                 {service.description}
               </p>
               <Link
                 href={`/servicii/${getServiceSlug(service.title)}`}
-                className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-all duration-300 text-sm group-hover:gap-2"
+                className="relative z-20 inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-all duration-300 text-sm group-hover:gap-2"
               >
                 <span>Află mai multe</span>
                 <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />

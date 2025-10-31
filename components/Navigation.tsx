@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Phone, Wrench, Sparkles } from 'lucide-react'
 
 export default function Navigation() {
@@ -35,126 +35,155 @@ export default function Navigation() {
     { name: 'Contact', href: '/contact' },
   ]
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-dark-900/95 backdrop-blur-xl shadow-2xl border-b border-white/5' 
-          : 'bg-dark-900/60 backdrop-blur-lg'
-      }`}
-    >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-20 md:h-24">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 md:space-x-3 group relative z-10 flex-shrink-0 max-w-[70%] md:max-w-none">
-            <motion.div 
-              className="relative"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="absolute inset-0 bg-primary-500/30 rounded-lg md:rounded-xl blur-lg group-hover:bg-primary-500/50 transition-all duration-500"></div>
-              <div className="relative bg-gradient-to-br from-primary-500 to-primary-600 p-2 md:p-3 rounded-lg md:rounded-xl shadow-lg group-hover:shadow-primary-500/50 transition-all duration-500">
-                <Wrench className="h-5 w-5 md:h-7 md:w-7 text-black" />
-              </div>
-            </motion.div>
-            <div className="min-w-0">
-              <h1 className="text-base md:text-2xl font-black text-white group-hover:text-primary-400 transition-colors duration-300 truncate">
-                Bet Auto Service
-              </h1>
-              <div className="hidden sm:flex items-center gap-1">
-                <Sparkles className="h-3 w-3 text-primary-400" />
-                <p className="text-xs text-gray-400 font-medium">Service Auto Profesional</p>
-              </div>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="relative text-white/90 hover:text-white font-semibold transition-all duration-300 px-4 py-2 rounded-lg group"
+    <>
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-[9998] transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-dark-900/95 backdrop-blur-xl shadow-2xl border-b border-white/5' 
+            : 'bg-dark-900/60 backdrop-blur-lg'
+        }`}
+      >
+        <div className="container-custom">
+          <div className="flex items-center justify-between h-20 md:h-24">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2 md:space-x-3 group relative z-10 flex-shrink-0 max-w-[70%] md:max-w-none">
+              <motion.div 
+                className="relative"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <span className="relative z-10">{item.name}</span>
-                <span className="absolute inset-0 bg-primary-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <motion.span 
-                  className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            ))}
-            <motion.a
-              href="tel:0726226622"
-              className="btn-primary flex items-center space-x-2 ml-4"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+                <div className="absolute inset-0 bg-primary-500/30 rounded-lg md:rounded-xl blur-lg group-hover:bg-primary-500/50 transition-all duration-500"></div>
+                <div className="relative bg-gradient-to-br from-primary-500 to-primary-600 p-2 md:p-3 rounded-lg md:rounded-xl shadow-lg group-hover:shadow-primary-500/50 transition-all duration-500">
+                  <Wrench className="h-5 w-5 md:h-7 md:w-7 text-black" />
+                </div>
+              </motion.div>
+              <div className="min-w-0">
+                <h1 className="text-base md:text-2xl font-black text-white group-hover:text-primary-400 transition-colors duration-300 truncate">
+                  Bet Auto Service
+                </h1>
+                <div className="hidden sm:flex items-center gap-1">
+                  <Sparkles className="h-3 w-3 text-primary-400" />
+                  <p className="text-xs text-gray-400 font-medium">Service Auto Profesional</p>
+                </div>
+              </div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-2">
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="relative text-white/90 hover:text-white font-semibold transition-all duration-300 px-4 py-2 rounded-lg group"
+                >
+                  <span className="relative z-10">{item.name}</span>
+                  <span className="absolute inset-0 bg-primary-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <motion.span 
+                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
+              ))}
+              <motion.a
+                href="tel:0726226622"
+                className="btn-primary flex items-center space-x-2 ml-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Phone className="h-4 w-4" />
+                <span className="hidden lg:inline">0726226622</span>
+                <span className="lg:hidden">Sună</span>
+              </motion.a>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={toggleMenu}
+              className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-[9999] p-2 flex-shrink-0 bg-dark-800/50 rounded-lg active:bg-dark-700/50 touch-manipulation"
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
-              <Phone className="h-4 w-4" />
-              <span className="hidden lg:inline">0726226622</span>
-              <span className="lg:hidden">Sună</span>
-            </motion.a>
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              setIsOpen(prev => !prev)
-            }}
-            className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-[120] p-2 flex-shrink-0 bg-dark-800/50 rounded-lg active:bg-dark-700/50 touch-manipulation"
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
         </div>
+      </nav>
 
-        {/* Mobile Navigation */}
+      {/* Mobile Navigation Menu - Outside nav for proper z-index */}
+      <AnimatePresence>
         {isOpen && (
           <>
-            <div
-              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[105] md:hidden"
-              onClick={() => setIsOpen(false)}
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[9999] md:hidden"
+              onClick={closeMenu}
             />
-            <div
-              className="md:hidden fixed top-20 left-0 right-0 bottom-0 w-full bg-dark-900 shadow-2xl z-[110] overflow-y-auto"
+            
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
+              className="fixed top-20 left-0 right-0 bottom-0 w-full bg-dark-900 z-[10000] md:hidden overflow-y-auto"
             >
-              <div className="p-6 md:p-8 space-y-4 md:space-y-6">
-                {navItems.map((item) => (
-                  <Link
+              <div className="p-6 space-y-4">
+                {navItems.map((item, index) => (
+                  <motion.div
                     key={item.name}
-                    href={item.href}
-                    className="block text-white hover:text-primary-400 font-bold text-lg md:text-xl transition-colors duration-300 py-3 border-b border-white/5"
-                    onClick={() => {
-                      setIsOpen(false)
-                    }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    {item.name}
-                  </Link>
+                    <Link
+                      href={item.href}
+                      className="block text-white hover:text-primary-400 font-bold text-xl transition-colors duration-300 py-4 border-b border-white/10"
+                      onClick={closeMenu}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
                 ))}
-                <a
-                  href="tel:0726226622"
-                  className="btn-primary flex items-center justify-center space-x-2 w-full mt-6 md:mt-8"
-                  onClick={() => {
-                    setIsOpen(false)
-                  }}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navItems.length * 0.1 }}
+                  className="pt-4"
                 >
-                  <Phone className="h-5 w-5" />
-                  <span>0726226622</span>
-                </a>
+                  <a
+                    href="tel:0726226622"
+                    className="btn-primary flex items-center justify-center space-x-2 w-full"
+                    onClick={closeMenu}
+                  >
+                    <Phone className="h-5 w-5" />
+                    <span>0726226622</span>
+                  </a>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </>
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+    </>
   )
 }

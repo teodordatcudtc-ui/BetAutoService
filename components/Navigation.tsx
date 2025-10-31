@@ -125,39 +125,53 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile Navigation Menu - Outside nav for proper z-index */}
+      {/* Mobile Navigation Menu - Compact dropdown */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop - transparent, just for closing */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[9999] md:hidden"
+              className="fixed inset-0 z-[9999] md:hidden"
               onClick={closeMenu}
             />
             
-            {/* Menu Panel */}
+            {/* Menu Panel - Compact dropdown */}
             <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-              className="fixed top-20 left-0 right-0 bottom-0 w-full bg-dark-900 z-[10000] md:hidden overflow-y-auto"
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
+              className="fixed top-20 right-4 bg-dark-900/98 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl z-[10000] md:hidden min-w-[280px] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="p-6 space-y-4">
+              {/* Close button */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10">
+                <span className="text-white font-bold text-lg">Meniu</span>
+                <button
+                  onClick={closeMenu}
+                  className="text-white hover:text-primary-400 transition-colors duration-300 p-2 hover:bg-white/10 rounded-lg"
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              {/* Menu Items */}
+              <div className="p-2">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.name}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     <Link
                       href={item.href}
-                      className="block text-white hover:text-primary-400 font-bold text-xl transition-colors duration-300 py-4 border-b border-white/10"
+                      className="block text-white hover:text-primary-400 hover:bg-white/5 font-semibold text-base transition-all duration-300 py-3 px-4 rounded-lg"
                       onClick={closeMenu}
                     >
                       {item.name}
@@ -165,17 +179,17 @@ export default function Navigation() {
                   </motion.div>
                 ))}
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
-                  className="pt-4"
+                  transition={{ delay: navItems.length * 0.05 }}
+                  className="pt-2 px-2 pb-3"
                 >
                   <a
                     href="tel:0726226622"
-                    className="btn-primary flex items-center justify-center space-x-2 w-full"
+                    className="btn-primary flex items-center justify-center space-x-2 w-full text-sm py-2.5"
                     onClick={closeMenu}
                   >
-                    <Phone className="h-5 w-5" />
+                    <Phone className="h-4 w-4" />
                     <span>0726226622</span>
                   </a>
                 </motion.div>

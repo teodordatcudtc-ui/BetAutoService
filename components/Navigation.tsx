@@ -47,24 +47,24 @@ export default function Navigation() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group relative z-10">
+          <Link href="/" className="flex items-center space-x-2 md:space-x-3 group relative z-10 flex-shrink-0 max-w-[70%] md:max-w-none">
             <motion.div 
               className="relative"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="absolute inset-0 bg-primary-500/30 rounded-xl blur-lg group-hover:bg-primary-500/50 transition-all duration-500"></div>
-              <div className="relative bg-gradient-to-br from-primary-500 to-primary-600 p-3 rounded-xl shadow-lg group-hover:shadow-primary-500/50 transition-all duration-500">
-                <Wrench className="h-7 w-7 text-black" />
+              <div className="absolute inset-0 bg-primary-500/30 rounded-lg md:rounded-xl blur-lg group-hover:bg-primary-500/50 transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-primary-500 to-primary-600 p-2 md:p-3 rounded-lg md:rounded-xl shadow-lg group-hover:shadow-primary-500/50 transition-all duration-500">
+                <Wrench className="h-5 w-5 md:h-7 md:w-7 text-black" />
               </div>
             </motion.div>
-            <div>
-              <h1 className="text-2xl font-black text-white group-hover:text-primary-400 transition-colors duration-300">
+            <div className="min-w-0">
+              <h1 className="text-base md:text-2xl font-black text-white group-hover:text-primary-400 transition-colors duration-300 truncate">
                 Bet Auto Service
               </h1>
-              <div className="flex items-center gap-1">
+              <div className="hidden sm:flex items-center gap-1">
                 <Sparkles className="h-3 w-3 text-primary-400" />
                 <p className="text-xs text-gray-400 font-medium">Service Auto Profesional</p>
               </div>
@@ -103,13 +103,18 @@ export default function Navigation() {
 
           {/* Mobile menu button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-50 p-2"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setIsOpen(!isOpen)
+            }}
+            className="md:hidden text-white hover:text-primary-400 transition-colors duration-300 relative z-[60] p-2 flex-shrink-0 bg-dark-800/50 rounded-lg active:bg-dark-700/50"
+            aria-label="Toggle menu"
           >
             {isOpen ? (
-              <X className="h-7 w-7" />
+              <X className="h-6 w-6" />
             ) : (
-              <Menu className="h-7 w-7" />
+              <Menu className="h-6 w-6" />
             )}
           </button>
         </div>
@@ -118,11 +123,11 @@ export default function Navigation() {
         {isOpen && (
           <>
             <div
-              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-40 md:hidden"
+              className="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-[45] md:hidden"
               onClick={() => setIsOpen(false)}
             />
             <div
-              className="md:hidden fixed top-24 right-0 bottom-0 w-80 bg-dark-900/98 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-40 overflow-y-auto"
+              className="md:hidden fixed top-20 right-0 bottom-0 w-full sm:w-80 bg-dark-900/98 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-[50] overflow-y-auto"
             >
               <div className="p-8 space-y-6">
                 {navItems.map((item) => (

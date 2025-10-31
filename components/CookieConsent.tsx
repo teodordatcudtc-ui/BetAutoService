@@ -72,21 +72,21 @@ export default function CookieConsent() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed bottom-0 left-0 right-0 z-50 p-4 lg:p-6"
+            className="fixed bottom-0 left-0 right-0 z-50 p-3 md:p-4 lg:p-6"
           >
             <div className="max-w-6xl mx-auto">
-              <div className="bg-dark-800/95 backdrop-blur-2xl p-6 lg:p-8 rounded-2xl border-2 border-primary-500/30 shadow-2xl">
-                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+              <div className="bg-dark-800/95 backdrop-blur-2xl p-4 md:p-6 lg:p-8 rounded-xl md:rounded-2xl border-2 border-primary-500/30 shadow-2xl relative">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 md:gap-6">
                   {/* Icon & Content */}
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="bg-primary-500/20 rounded-xl p-3 flex-shrink-0">
-                      <Cookie className="h-6 w-6 text-primary-400" />
+                  <div className="flex items-start gap-3 md:gap-4 flex-1">
+                    <div className="bg-primary-500/20 rounded-lg md:rounded-xl p-2 md:p-3 flex-shrink-0">
+                      <Cookie className="h-5 w-5 md:h-6 md:w-6 text-primary-400" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-black text-white mb-2">
+                      <h3 className="text-base md:text-xl font-black text-white mb-1.5 md:mb-2">
                         Folosim Cookie-uri
                       </h3>
-                      <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                      <p className="text-xs md:text-sm text-gray-300 mb-3 md:mb-4 leading-relaxed">
                         Folosim cookie-uri pentru a îmbunătăți experiența ta pe site, pentru analiză și pentru personalizare.{' '}
                         <Link 
                           href="/politica-cookie-uri" 
@@ -95,24 +95,25 @@ export default function CookieConsent() {
                           Află mai multe
                         </Link>
                       </p>
-                      <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-wrap gap-2 md:gap-3">
                         <button
                           onClick={acceptAll}
-                          className="btn-primary text-sm px-6 py-2.5 flex items-center gap-2"
+                          className="btn-primary text-xs md:text-sm px-4 md:px-6 py-1.5 md:py-2.5 flex items-center gap-1.5 md:gap-2"
                         >
-                          <Check className="h-4 w-4" />
-                          Acceptă Toate
+                          <Check className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                          <span className="hidden sm:inline">Acceptă Toate</span>
+                          <span className="sm:hidden">Acceptă</span>
                         </button>
                         <button
                           onClick={() => setShowSettings(true)}
-                          className="btn-secondary text-sm px-6 py-2.5 flex items-center gap-2"
+                          className="btn-secondary text-xs md:text-sm px-4 md:px-6 py-1.5 md:py-2.5 flex items-center gap-1.5 md:gap-2"
                         >
-                          <Settings className="h-4 w-4" />
+                          <Settings className="h-3.5 w-3.5 md:h-4 md:w-4" />
                           Setări
                         </button>
                         <button
                           onClick={rejectAll}
-                          className="px-6 py-2.5 text-sm text-gray-400 hover:text-white transition-colors duration-300"
+                          className="px-4 md:px-6 py-1.5 md:py-2.5 text-xs md:text-sm text-gray-400 hover:text-white transition-colors duration-300"
                         >
                           Respinge
                         </button>
@@ -122,9 +123,9 @@ export default function CookieConsent() {
                   {/* Close Button */}
                   <button
                     onClick={rejectAll}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-lg hover:bg-white/10 flex-shrink-0"
+                    className="absolute top-3 right-3 md:relative md:top-auto md:right-auto text-gray-400 hover:text-white transition-colors duration-300 p-1.5 md:p-2 rounded-lg hover:bg-white/10 flex-shrink-0"
                   >
-                    <X className="h-5 w-5" />
+                    <X className="h-4 w-4 md:h-5 md:w-5" />
                   </button>
                 </div>
               </div>

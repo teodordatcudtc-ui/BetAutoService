@@ -139,13 +139,13 @@ export default function Navigation() {
               onClick={closeMenu}
             />
             
-            {/* Menu Panel - Compact dropdown */}
+            {/* Menu Panel - Wide dropdown */}
             <motion.div
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
-              className="fixed top-20 right-4 bg-dark-900/98 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl z-[10000] md:hidden min-w-[280px] overflow-hidden"
+              className="fixed top-20 left-4 right-4 bg-dark-900/98 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl z-[10000] md:hidden overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
